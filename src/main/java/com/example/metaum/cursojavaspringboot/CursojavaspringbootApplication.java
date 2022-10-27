@@ -17,7 +17,7 @@ public class CursojavaspringbootApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Iniciando o RUN");
+		System.out.println("Iniciando o RUN...");
 		
 		Curso c = new Curso();
 		
