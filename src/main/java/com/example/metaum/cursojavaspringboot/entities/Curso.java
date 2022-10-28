@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "curso")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Curso {
 
 	@Id
@@ -23,4 +21,10 @@ public class Curso {
 	private Integer id;
 	@Column(name = "nome_curso")
 	private String nome;
+
+	public Curso(String nome) {
+		super();
+		this.nome = nome;
+	}
+
 }
