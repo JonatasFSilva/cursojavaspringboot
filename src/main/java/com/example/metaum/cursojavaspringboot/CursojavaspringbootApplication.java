@@ -27,9 +27,9 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		Curso curso1 = new Curso("Graduação em Ti");
 		Curso curso2 = new Curso("Graduação em Economia");
 		Curso curso3 = new Curso("Graduacao em Administracao");
-		Curso curso4 = new Curso("Graduacao em Educacao Fisica");
-		Curso curso5 = new Curso("Graduacao em Educacao Continuada");
-		Curso curso6 = new Curso("Graduacao em Educacao Alternada");
+		Curso curso4 = new Curso("Graduacao em Educação Fisica");
+		Curso curso5 = new Curso("Graduacao em Educação Continuada");
+		Curso curso6 = new Curso("Graduacao em educação Alternativa");
 
 		// INSERT OR *UPDATE (SOMENTE SE FOR UM OBJETO INSTANCIADO?)
 		repository.save(curso1);
@@ -62,22 +62,27 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * Optional<Curso> cursoProcurado = repository.findById(3); Curso cursoFinal =
 		 * cursoProcurado.orElse(null); System.out.println("O nome do Curso buscado e: "
 		 * + cursoFinal.getNome());
+		 * 
+		 * 
+		 * // FIND BY NAME List<Curso> cursosPorNome =
+		 * repository.findCursoByNome("Graduacao em Administracao");
+		 * cursosPorNome.forEach(curso -> System.out.println(curso));
+		 * 
+		 * // FIND BY CONTAINING (IGUAL AO LIKE %___%) List<Curso> cursosPorNomeContendo
+		 * = repository.findCursoByNomeContaining("Graduacao");
+		 * cursosPorNomeContendo.forEach(curso -> System.out.println(curso));
+		 * 
+		 * // FIND BY LIKE (USAR O % PARA DEFINIR O QUE SERA PESQUISADO E/OU POR ONDE
+		 * DEVE // COMECAR A CONSIDERAR A BUSCA // COMECANDO POR (___%) // TERMINANDO
+		 * COM (%___) // QUE TENHA (%___%) List<Curso> cursosPorNomeQueTenha =
+		 * repository.findCursoByNomeLike("%Graduacao%");
+		 * cursosPorNomeQueTenha.forEach(curso -> System.out.println(curso));
 		 */
-
-		// FIND BY NAME
-		List<Curso> cursosPorNome = repository.findCursoByNome("Graduacao em Administracao");
-		cursosPorNome.forEach(curso -> System.out.println(curso));
-
-		// FIND BY CONTAINING (IGUAL AO LIKE %___%)
-		List<Curso> cursosPorNomeContendo = repository.findCursoByNomeContaining("Graduacao");
-		cursosPorNomeContendo.forEach(curso -> System.out.println(curso));
-
-		// FIND BY LIKE (USAR O % PARA DEFINIR O QUE SERA PESQUISADO E/OU POR ONDE DEVE
-		// COMECAR A CONSIDERAR A BUSCA
-		// COMECANDO POR (___%)
-		// TERMINANDO COM (%___)
-		// QUE TENHA (%___%)
-		List<Curso> cursosPorNomeQueTenha = repository.findCursoByNomeLike("%Graduacao%");
-		cursosPorNomeQueTenha.forEach(curso -> System.out.println(curso));
+		
+		List<Curso> cursoPorNomeLike = repository.findCursoByNomeLike("%Educação%");
+		cursoPorNomeLike.forEach(curso -> System.out.println(curso));
+		
+		List<Curso> cursoPorNomeLikeIgnoreCase = repository.findCursoByNomeLikeIgnoreCase("%Educação%");
+		cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
 	}
 }
