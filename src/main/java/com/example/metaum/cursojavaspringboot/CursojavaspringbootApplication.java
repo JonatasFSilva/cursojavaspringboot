@@ -85,14 +85,21 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * repository.findCursoByNomeLikeIgnoreCase("%Educação%");
 		 * cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
 		 */
-
+		
+		
 		List<Curso> cursoPorQuery = repository.findByQueryNome();
-		cursoPorQuery.forEach(curso -> System.out.println(curso));
+		cursoPorQuery.forEach(System.out::println);
 
 		List<String> cursoPorQueryNativa = repository.findByQueryNomePorArea();
 		cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
 		
 		List<String> cursoPorQueryNativaPassandoArea = repository.findByQueryNomePorAreaInformada("Humanas");
 		cursoPorQueryNativaPassandoArea.forEach(curso -> System.out.println(curso));
+		
+		List<String> cursoPorQueryNativaPassandoAreaCurso = repository.findByQueryNomePorAreaInformadaCurso("Humanas","Graduacao em Administracao");
+		cursoPorQueryNativaPassandoAreaCurso.forEach(curso -> System.out.println(curso));
+		
+		List<String> cursoPorQueryParamentro = repository.findByQueryPorParamentros("Exatas", "Graduação em Ti");
+		cursoPorQueryParamentro.forEach(curso -> System.out.println(curso));
 	}
 }
