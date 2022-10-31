@@ -1,6 +1,7 @@
 package com.example.metaum.cursojavaspringboot;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -54,5 +55,8 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * 
 		 * System.out.println("Total de Cursos: " + repository.count());
 		 */
+		Optional<Curso> cursoProcurado = repository.findById(3);
+		Curso cursoFinal = cursoProcurado.orElse(null);
+		System.out.println("O nome do Curso buscado e: " + cursoFinal.getNome());
 	}
 }
