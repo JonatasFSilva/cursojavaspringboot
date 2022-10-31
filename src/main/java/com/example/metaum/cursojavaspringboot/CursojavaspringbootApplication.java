@@ -28,12 +28,16 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		Curso curso2 = new Curso("Graduação em Economia");
 		Curso curso3 = new Curso("Graduacao em Administracao");
 		Curso curso4 = new Curso("Graduacao em Educacao Fisica");
+		Curso curso5 = new Curso("Graduacao em Educacao Continuada");
+		Curso curso6 = new Curso("Graduacao em Educacao Alternada");
 
 		// INSERT OR *UPDATE (SOMENTE SE FOR UM OBJETO INSTANCIADO?)
 		repository.save(curso1);
 		repository.save(curso2);
 		repository.save(curso3);
 		repository.save(curso4);
+		repository.save(curso5);
+		repository.save(curso6);
 
 		/*
 		 * List<Curso> listaDeCursos = repository.findAll();
