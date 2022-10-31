@@ -91,5 +91,8 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 
 		List<String> cursoPorQueryNativa = repository.findByQueryNomePorArea();
 		cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
+		
+		List<String> cursoPorQueryNativaPassandoArea = repository.findByQueryNomePorAreaInformada("Humanas");
+		cursoPorQueryNativaPassandoArea.forEach(curso -> System.out.println(curso));
 	}
 }
