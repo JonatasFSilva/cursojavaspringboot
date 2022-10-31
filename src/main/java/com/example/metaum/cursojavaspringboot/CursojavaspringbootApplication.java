@@ -24,8 +24,8 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Curso curso1 = new Curso("Graduacao em Ti");
-		Curso curso2 = new Curso("Graduacao em Economia");
+		Curso curso1 = new Curso("Graduação em Ti");
+		Curso curso2 = new Curso("Graduação em Economia");
 		Curso curso3 = new Curso("Graduacao em Administracao");
 		Curso curso4 = new Curso("Graduacao em Educacao Fisica");
 
@@ -54,9 +54,26 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * System.out.println(c));
 		 * 
 		 * System.out.println("Total de Cursos: " + repository.count());
+		 * 
+		 * Optional<Curso> cursoProcurado = repository.findById(3); Curso cursoFinal =
+		 * cursoProcurado.orElse(null); System.out.println("O nome do Curso buscado e: "
+		 * + cursoFinal.getNome());
 		 */
-		Optional<Curso> cursoProcurado = repository.findById(3);
-		Curso cursoFinal = cursoProcurado.orElse(null);
-		System.out.println("O nome do Curso buscado e: " + cursoFinal.getNome());
+
+		// FIND BY NAME
+		List<Curso> cursosPorNome = repository.findCursoByNome("Graduacao em Administracao");
+		cursosPorNome.forEach(curso -> System.out.println(curso));
+
+		// FIND BY CONTAINING (IGUAL AO LIKE %___%)
+		List<Curso> cursosPorNomeContendo = repository.findCursoByNomeContaining("Graduacao");
+		cursosPorNomeContendo.forEach(curso -> System.out.println(curso));
+
+		// FIND BY LIKE (USAR O % PARA DEFINIR O QUE SERA PESQUISADO E/OU POR ONDE DEVE
+		// COMECAR A CONSIDERAR A BUSCA
+		// COMECANDO POR (___%)
+		// TERMINANDO COM (%___)
+		// QUE TENHA (%___%)
+		List<Curso> cursosPorNomeQueTenha = repository.findCursoByNomeLike("%Graduacao%");
+		cursosPorNomeQueTenha.forEach(curso -> System.out.println(curso));
 	}
 }
