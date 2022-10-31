@@ -24,12 +24,12 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Curso curso1 = new Curso("Graduação em Ti");
-		Curso curso2 = new Curso("Graduação em Economia");
-		Curso curso3 = new Curso("Graduacao em Administracao");
-		Curso curso4 = new Curso("Graduacao em Educação Fisica");
-		Curso curso5 = new Curso("Graduacao em Educação Continuada");
-		Curso curso6 = new Curso("Graduacao em educação Alternativa");
+		Curso curso1 = new Curso("Graduação em Ti", "Exatas");
+		Curso curso2 = new Curso("Graduação em Economia", "Humanas");
+		Curso curso3 = new Curso("Graduacao em Administracao", "Humanas");
+		Curso curso4 = new Curso("Graduacao em Educação Fisica", "Humanas");
+		Curso curso5 = new Curso("Graduacao em Educação Continuada", "Humanas");
+		Curso curso6 = new Curso("Graduacao em Fisica", "Exatas");
 
 		// INSERT OR *UPDATE (SOMENTE SE FOR UM OBJETO INSTANCIADO?)
 		repository.save(curso1);
@@ -77,12 +77,19 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * COM (%___) // QUE TENHA (%___%) List<Curso> cursosPorNomeQueTenha =
 		 * repository.findCursoByNomeLike("%Graduacao%");
 		 * cursosPorNomeQueTenha.forEach(curso -> System.out.println(curso));
+		 * 
+		 * List<Curso> cursoPorNomeLike = repository.findCursoByNomeLike("%Educação%");
+		 * cursoPorNomeLike.forEach(curso -> System.out.println(curso));
+		 * 
+		 * List<Curso> cursoPorNomeLikeIgnoreCase =
+		 * repository.findCursoByNomeLikeIgnoreCase("%Educação%");
+		 * cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
 		 */
-		
-		List<Curso> cursoPorNomeLike = repository.findCursoByNomeLike("%Educação%");
-		cursoPorNomeLike.forEach(curso -> System.out.println(curso));
-		
-		List<Curso> cursoPorNomeLikeIgnoreCase = repository.findCursoByNomeLikeIgnoreCase("%Educação%");
-		cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
+
+		List<Curso> cursoPorQuery = repository.findByQueryNome();
+		cursoPorQuery.forEach(curso -> System.out.println(curso));
+
+		List<String> cursoPorQueryNativa = repository.findByQueryNomePorArea();
+		cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
 	}
 }

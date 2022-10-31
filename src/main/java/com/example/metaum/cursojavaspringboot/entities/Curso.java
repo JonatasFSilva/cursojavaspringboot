@@ -19,12 +19,16 @@ public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name = "nome_curso")
+	@Column(name = "nome_do_curso", nullable = false)
 	private String nome;
 
-	public Curso(String nome) {
+	@Column(nullable = false)
+	private String area;
+
+	public Curso(String nome, String area) {
 		super();
 		this.nome = nome;
+		this.area = area;
 	}
 
 }
