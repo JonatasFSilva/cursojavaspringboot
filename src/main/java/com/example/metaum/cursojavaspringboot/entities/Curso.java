@@ -2,12 +2,15 @@ package com.example.metaum.cursojavaspringboot.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -52,6 +55,10 @@ public class Curso {
 	// DE DADOS)
 	@Transient
 	private BigDecimal valorDoCurso;
+
+	// UM CURSO PARA MUITOS ALUNOS
+	@OneToMany
+	private List<Aluno> alunos = new ArrayList<>();
 
 	// METODO UTILIZADO NO MOMDENTO DA CRIACAO DO OBJETO
 	@PostPersist
