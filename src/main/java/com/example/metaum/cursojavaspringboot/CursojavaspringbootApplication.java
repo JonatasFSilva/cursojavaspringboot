@@ -1,5 +1,7 @@
 package com.example.metaum.cursojavaspringboot;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.metaum.cursojavaspringboot.entities.Aluno;
 import com.example.metaum.cursojavaspringboot.entities.Curso;
+import com.example.metaum.cursojavaspringboot.entities.GradeCurricular;
 import com.example.metaum.cursojavaspringboot.repositorires.AlunoRepository;
 import com.example.metaum.cursojavaspringboot.repositorires.CursoRepository;
+import com.example.metaum.cursojavaspringboot.repositorires.GradeCurricularRepository;
 
 @SpringBootApplication
 public class CursojavaspringbootApplication implements CommandLineRunner {
@@ -18,6 +22,9 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 
 	@Autowired
 	private AlunoRepository alunoRepository;
+
+	@Autowired
+	private GradeCurricularRepository gradeCurricularRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursojavaspringbootApplication.class, args);
@@ -43,8 +50,19 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 
 		Aluno aluno1 = new Aluno("Jose", curso1);
 		Aluno aluno2 = new Aluno("Aline", curso1);
+		Aluno aluno3 = new Aluno("Humberto", curso4);
 
 		alunoRepository.save(aluno1);
 		alunoRepository.save(aluno2);
+		alunoRepository.save(aluno3);
+
+		GradeCurricular gradeCurricular1 = new GradeCurricular("Graduacao em Games", aluno1);
+		GradeCurricular gradeCurricular2 = new GradeCurricular("Graduacao em Fisica", aluno2);
+		GradeCurricular gradeCurricular3 = new GradeCurricular("Graduacao em Academia de Rua", aluno3);
+
+		gradeCurricularRepository.save(gradeCurricular1);
+		gradeCurricularRepository.save(gradeCurricular2);
+		gradeCurricularRepository.save(gradeCurricular3);
+
 	}
 }

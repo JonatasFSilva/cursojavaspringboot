@@ -5,42 +5,39 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "grade")
+@Table(name = "materia")
 @NoArgsConstructor
-public class GradeCurricular {
+public class Materia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(nullable = true)
-	private String objetivo;
+	private String nome;
 
-	// UMA GRADE PRA UM ALUNO, USANDO O ID DO ALUNO COMO CHAVE ESTRANGEIRA
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aluno_id", referencedColumnName = "id")
-	private Aluno aluno;
+	// MUITAS GRADES PARA MUITAS MATERIAS
+	@ManyToMany
+	@JoinTable(name = "grade_materia", joinColumns = {
+			@JoinColumn(name = "materia_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "grade_id", referencedColumnName = "id") })
+	private Set<GradeCurricular> grades = new HashSet<>();
 
-	// MUITAS MATERIAS PARA MUITAS GRADES
-	@ManyToMany(mappedBy = "grades")
-	private Set<Materia> materias = new HashSet<>();
-
-	public GradeCurricular(String objetivo, Aluno aluno) {
+	public Materia(String nome, Set<GradeCurricular> grades) {
 		super();
-		this.objetivo = objetivo;
-		this.aluno = aluno;
+		this.nome = nome;
+		this.grades = grades;
 	}
 
 }
