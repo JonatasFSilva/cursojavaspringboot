@@ -1,5 +1,6 @@
 package com.example.metaum.cursojavaspringboot;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.metaum.cursojavaspringboot.entities.Aluno;
 import com.example.metaum.cursojavaspringboot.entities.Curso;
 import com.example.metaum.cursojavaspringboot.entities.GradeCurricular;
+import com.example.metaum.cursojavaspringboot.entities.Materia;
 import com.example.metaum.cursojavaspringboot.repositorires.AlunoRepository;
 import com.example.metaum.cursojavaspringboot.repositorires.CursoRepository;
 import com.example.metaum.cursojavaspringboot.repositorires.GradeCurricularRepository;
+import com.example.metaum.cursojavaspringboot.repositorires.MateriaRepository;
 
 @SpringBootApplication
 public class CursojavaspringbootApplication implements CommandLineRunner {
@@ -25,6 +28,9 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 
 	@Autowired
 	private GradeCurricularRepository gradeCurricularRepository;
+
+	@Autowired
+	private MateriaRepository materiaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursojavaspringbootApplication.class, args);
@@ -57,12 +63,23 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		alunoRepository.save(aluno3);
 
 		GradeCurricular gradeCurricular1 = new GradeCurricular("Graduacao em Games", aluno1);
-		GradeCurricular gradeCurricular2 = new GradeCurricular("Graduacao em Fisica", aluno2);
-		GradeCurricular gradeCurricular3 = new GradeCurricular("Graduacao em Academia de Rua", aluno3);
+		GradeCurricular gradeCurricular2 = new GradeCurricular("Graduacao em Academia de Rua", aluno3);
 
 		gradeCurricularRepository.save(gradeCurricular1);
 		gradeCurricularRepository.save(gradeCurricular2);
-		gradeCurricularRepository.save(gradeCurricular3);
+
+		Set<GradeCurricular> gradesMateria1 = new HashSet<>();
+		Set<GradeCurricular> gradesMateria2 = new HashSet<>();
+		gradesMateria1.add(gradeCurricular1);
+		gradesMateria2.add(gradeCurricular2);
+
+		Materia materia1 = new Materia("Design", gradesMateria1);
+		Materia materia2 = new Materia("Marketing", gradesMateria2);
+		Materia materia3 = new Materia("Cultura e Moda", gradesMateria1);
+
+		materiaRepository.save(materia1);
+		materiaRepository.save(materia2);
+		materiaRepository.save(materia3);
 
 	}
 }
