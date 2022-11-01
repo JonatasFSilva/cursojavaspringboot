@@ -57,7 +57,8 @@ public class Curso {
 	private BigDecimal valorDoCurso;
 
 	// UM CURSO PARA MUITOS ALUNOS
-	@OneToMany
+	// UMA LISTA COM VARIOS ALUNOS POR CURSO
+	@OneToMany(mappedBy = "curso") // NOME DA PROPRIEADE QUE IRA RECEBER O RELACIONAMENTO NA ENTITY ALUNO
 	private List<Aluno> alunos = new ArrayList<>();
 
 	// METODO UTILIZADO NO MOMDENTO DA CRIACAO DO OBJETO
@@ -69,7 +70,7 @@ public class Curso {
 	// METODO UTILIZADO ANTES DA CRIACAO DO OBJETO
 	@PrePersist
 	private void antesDePersistirDados() {
-		this.usuario = "";
+		this.usuario = "Admin";
 	}
 
 	public Curso(String nome, String area) {

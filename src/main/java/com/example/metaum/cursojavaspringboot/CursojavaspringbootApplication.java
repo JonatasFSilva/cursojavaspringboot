@@ -1,21 +1,23 @@
 package com.example.metaum.cursojavaspringboot;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.metaum.cursojavaspringboot.entities.Aluno;
 import com.example.metaum.cursojavaspringboot.entities.Curso;
+import com.example.metaum.cursojavaspringboot.repositorires.AlunoRepository;
 import com.example.metaum.cursojavaspringboot.repositorires.CursoRepository;
 
 @SpringBootApplication
 public class CursojavaspringbootApplication implements CommandLineRunner {
 
 	@Autowired
-	private CursoRepository repository;
+	private CursoRepository cursoRepository;
+
+	@Autowired
+	private AlunoRepository alunoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursojavaspringbootApplication.class, args);
@@ -32,20 +34,24 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		Curso curso6 = new Curso("Graduacao em Fisica", "Exatas");
 
 		// INSERT OR *UPDATE (SOMENTE SE FOR UM OBJETO INSTANCIADO?)
-		repository.save(curso1);
-		repository.save(curso2);
-		repository.save(curso3);
-		repository.save(curso4);
-		repository.save(curso5);
-		repository.save(curso6);
+		cursoRepository.save(curso1);
+		cursoRepository.save(curso2);
+		cursoRepository.save(curso3);
+		cursoRepository.save(curso4);
+		cursoRepository.save(curso5);
+		cursoRepository.save(curso6);
 
-		// System.out.println("Aguardando 3 segundos...");
-		// Thread.sleep(3000);
+		Aluno aluno1 = new Aluno("Jose", curso1);
+		Aluno aluno2 = new Aluno("Aline", curso1);
 
-		curso6.setNome("Graduacao em Fisica - Alterada");
-		repository.save(curso6);
+		alunoRepository.save(aluno1);
+		alunoRepository.save(aluno2);
 
 		/*
+		 * System.out.println("Aguardando 3 segundos..."); Thread.sleep(3000);
+		 * 
+		 * curso6.setNome("Graduacao em Fisica - Alterada"); repository.save(curso6);
+		 * 
 		 * List<Curso> listaDeCursos = repository.findAll();
 		 * 
 		 * listaDeCursos.forEach(curso -> System.out.println(curso));
@@ -68,7 +74,6 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * Optional<Curso> cursoProcurado = repository.findById(3); Curso cursoFinal =
 		 * cursoProcurado.orElse(null); System.out.println("O nome do Curso buscado e: "
 		 * + cursoFinal.getNome());
-		 * 
 		 * 
 		 * // FIND BY NAME List<Curso> cursosPorNome =
 		 * repository.findCursoByNome("Graduacao em Administracao");
