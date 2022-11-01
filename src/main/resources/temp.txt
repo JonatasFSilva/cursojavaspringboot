@@ -1,0 +1,68 @@
+
+
+		System.out.println("Aguardando 3 segundos...");
+		Thread.sleep(3000);
+
+		curso6.setNome("Graduacao em Fisica - Alterada");
+		cursoRepository.save(curso6);
+
+		List<Curso> listaDeCursos = cursoRepository.findAll();
+
+		listaDeCursos.forEach(curso -> System.out.println(curso));
+
+		System.out.println("Total de Cursos: " + cursoRepository.count());
+
+		curso2.setNome("Graduacao em Administracao");
+		cursoRepository.save(curso2);
+
+		listaDeCursos = cursoRepository.findAll();
+		listaDeCursos.forEach(curso -> System.out.println(curso));
+
+		// DELETE OBJETCT OR DELETE BY ID
+		cursoRepository.delete(curso1);
+		cursoRepository.deleteById(2);
+
+		listaDeCursos = cursoRepository.findAll();
+		listaDeCursos.forEach(c -> System.out.println(c));
+
+		System.out.println("Total de Cursos: " + cursoRepository.count());
+
+		Optional<Curso> cursoProcurado = cursoRepository.findById(3);
+		Curso cursoFinal = cursoProcurado.orElse(null);
+		System.out.println("O nome do Curso buscado e: " + cursoFinal.getNome());
+
+		// FIND BY NAME
+		List<Curso> cursosPorNome = cursoRepository.findCursoByNome("Graduacao em Administracao");
+		cursosPorNome.forEach(curso -> System.out.println(curso));
+
+		// FIND BY CONTAINING (IGUAL AO LIKE %___%)
+		List<Curso> cursosPorNomeContendo = cursoRepository.findCursoByNomeContaining("Graduacao");
+		cursosPorNomeContendo.forEach(curso -> System.out.println(curso));
+
+		// FIND BY LIKE (USAR O % PARA DEFINIR O QUE SERA PESQUISADO E/OU POR ONDE DEVE
+		// COMECAR A CONSIDERAR A BUSCA // COMECANDO POR (___%) // TERMINANDO COM (%___)
+		// QUE TENHA (%___%)
+		List<Curso> cursosPorNomeQueTenha = cursoRepository.findCursoByNomeLike("%Graduacao%");
+		cursosPorNomeQueTenha.forEach(curso -> System.out.println(curso));
+
+		List<Curso> cursoPorNomeLike = cursoRepository.findCursoByNomeLike("%Educação%");
+		cursoPorNomeLike.forEach(curso -> System.out.println(curso));
+
+		List<Curso> cursoPorNomeLikeIgnoreCase = cursoRepository.findCursoByNomeLikeIgnoreCase("%Educação%");
+		cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
+
+		List<Curso> cursoPorQuery = cursoRepository.findByQueryNome();
+		cursoPorQuery.forEach(System.out::println);
+
+		List<String> cursoPorQueryNativa = cursoRepository.findByQueryNomePorArea();
+		cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
+
+		List<String> cursoPorQueryNativaPassandoArea = cursoRepository.findByQueryNomePorAreaInformada("Humanas");
+		cursoPorQueryNativaPassandoArea.forEach(curso -> System.out.println(curso));
+
+		List<String> cursoPorQueryNativaPassandoAreaCurso = cursoRepository
+				.findByQueryNomePorAreaInformadaCurso("Humanas", "Graduacao em Administracao");
+		cursoPorQueryNativaPassandoAreaCurso.forEach(curso -> System.out.println(curso));
+
+		List<String> cursoPorQueryParamentro = cursoRepository.findByQueryPorParamentros("Exatas", "Graduação em Ti");
+		cursoPorQueryParamentro.forEach(curso -> System.out.println(curso));
