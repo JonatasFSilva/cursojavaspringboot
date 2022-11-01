@@ -39,6 +39,12 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		repository.save(curso5);
 		repository.save(curso6);
 
+		System.out.println("Aguardando 3 segundos...");
+		Thread.sleep(3000);
+		
+		curso6.setNome("Graduacao em Fisica - Alterada");
+		repository.save(curso6);
+
 		/*
 		 * List<Curso> listaDeCursos = repository.findAll();
 		 * 
@@ -84,22 +90,26 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		 * List<Curso> cursoPorNomeLikeIgnoreCase =
 		 * repository.findCursoByNomeLikeIgnoreCase("%Educação%");
 		 * cursoPorNomeLikeIgnoreCase.forEach(curso -> System.out.println(curso));
+		 * 
+		 * List<Curso> cursoPorQuery = repository.findByQueryNome();
+		 * cursoPorQuery.forEach(System.out::println);
+		 * 
+		 * List<String> cursoPorQueryNativa = repository.findByQueryNomePorArea();
+		 * cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
+		 * 
+		 * List<String> cursoPorQueryNativaPassandoArea =
+		 * repository.findByQueryNomePorAreaInformada("Humanas");
+		 * cursoPorQueryNativaPassandoArea.forEach(curso -> System.out.println(curso));
+		 * 
+		 * List<String> cursoPorQueryNativaPassandoAreaCurso =
+		 * repository.findByQueryNomePorAreaInformadaCurso(
+		 * "Humanas","Graduacao em Administracao");
+		 * cursoPorQueryNativaPassandoAreaCurso.forEach(curso ->
+		 * System.out.println(curso));
+		 * 
+		 * List<String> cursoPorQueryParamentro =
+		 * repository.findByQueryPorParamentros("Exatas", "Graduação em Ti");
+		 * cursoPorQueryParamentro.forEach(curso -> System.out.println(curso));
 		 */
-		
-		
-		List<Curso> cursoPorQuery = repository.findByQueryNome();
-		cursoPorQuery.forEach(System.out::println);
-
-		List<String> cursoPorQueryNativa = repository.findByQueryNomePorArea();
-		cursoPorQueryNativa.forEach(curso -> System.out.println(curso));
-		
-		List<String> cursoPorQueryNativaPassandoArea = repository.findByQueryNomePorAreaInformada("Humanas");
-		cursoPorQueryNativaPassandoArea.forEach(curso -> System.out.println(curso));
-		
-		List<String> cursoPorQueryNativaPassandoAreaCurso = repository.findByQueryNomePorAreaInformadaCurso("Humanas","Graduacao em Administracao");
-		cursoPorQueryNativaPassandoAreaCurso.forEach(curso -> System.out.println(curso));
-		
-		List<String> cursoPorQueryParamentro = repository.findByQueryPorParamentros("Exatas", "Graduação em Ti");
-		cursoPorQueryParamentro.forEach(curso -> System.out.println(curso));
 	}
 }
