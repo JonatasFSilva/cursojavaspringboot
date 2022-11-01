@@ -39,9 +39,9 @@ public class CursojavaspringbootApplication implements CommandLineRunner {
 		repository.save(curso5);
 		repository.save(curso6);
 
-		System.out.println("Aguardando 3 segundos...");
-		Thread.sleep(3000);
-		
+		// System.out.println("Aguardando 3 segundos...");
+		// Thread.sleep(3000);
+
 		curso6.setNome("Graduacao em Fisica - Alterada");
 		repository.save(curso6);
 
